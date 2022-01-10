@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public Rigidbody playerRigidbody;
 
     [Space]
+    public GameObject trash;
+
+    [Space]
     public float speedMultiplier = 1f;
 
     private Vector2 _touchPos = Vector2.zero;
