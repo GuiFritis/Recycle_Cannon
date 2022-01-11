@@ -19,35 +19,37 @@ public class Player : MonoBehaviour
     public HealthBase health;
 
     [Header("Tags")]
-    public string monsterTag = "monster";
-    public string trashTag = "trash";
-    public string trashCanTag = "trashCan";
+    public string monsterTag = "Monster";
+    public string trashTag = "Trash";
+    public string trashCanTag = "TrashCan";
 
     public float tapDuration = 0.2f;
 
     private Vector2 _touchPos = Vector2.zero;
-    private int _moveTouch;
+    private int _touchIndex = -1;
     private Vector3 _mousePos = Vector2.zero;
 
     private float _touchDuration = 0f;
     private bool _tapped = false;
+    private bool touch = false;
 
     // Update is called once per frame
     void Update()
     {
         TouchInputControl();
+        Move();
     }
 
     private void TouchInputControl(){
         _tapped = false;
         if(Input.touchCount > 0){
             verifyTouchPosition();
-            if(_moveTouch >= 0){
-                _touchDuration += Input.GetTouch(_moveTouch).deltaTime;
+            if(_touchIndex >= 0){
+                _touchDuration += Input.GetTouch(_touchIndex).deltaTime;
                 if(_touchDuration > tapDuration){
                     Move();
-                } else if(Input.GetTouch(_moveTouch).phase == TouchPhase.Ended){
-                    _tapped = true;
+                } else if(Input.GetTouch(_touchIndex).phase == TouchPhase.Ended){
+                    _tapped = true;       
                 }
             } else {
                 _touchDuration = 0f;
@@ -56,29 +58,34 @@ public class Player : MonoBehaviour
     }
 
     private void Move(){
-        if(Input.GetTouch(_moveTouch).phase != TouchPhase.Ended){
-            playerRigidbody.velocity = new Vector3(_touchPos.x - Input.GetTouch(_moveTouch).position.x, 0, _touchPos.y - Input.GetTouch(_moveTouch).position.y) * speedMultiplier;
-        } else {
-            playerRigidbody.velocity = Vector3.zero;
-        }
+        // if(Input.GetTouch(_touchIndex).phase != TouchPhase.Ended){
+        //     playerRigidbody.velocity = new Vector3(_touchPos.x - Input.GetTouch(_touchIndex).position.x, 0, _touchPos.y - Input.GetTouch(_touchIndex).position.y) * speedMultiplier;
+        // } else {
+        //     playerRigidbody.velocity = Vector3.zero;
+        // }
         // DEBUG WITH MOUSE
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width/2){
             _mousePos = Input.mousePosition;
+            touch = true;
         }
-        if(Input.GetMouseButton(0)){
+        if(Input.GetMouseButton(0) && touch){
             playerRigidbody.velocity = new Vector3(_mousePos.x - Input.mousePosition.x, 0, _mousePos.y - Input.mousePosition.y).normalized * -speedMultiplier;
+        }
+        if(Input.GetMouseButtonUp(0)){
+            playerRigidbody.velocity = Vector3.zero;
+            touch = false;
         }
     }
 
     private void verifyTouchPosition(){
-        if(Input.GetTouch(_moveTouch).phase == TouchPhase.Ended){
-            _moveTouch = Input.touchCount-1;
-            if(Input.GetTouch(_moveTouch).phase == TouchPhase.Began){
-                if(Input.GetTouch(_moveTouch).position.x > Screen.width/2){
-                    _touchPos = Input.GetTouch(_moveTouch).position;
+        if(_touchIndex < 0){
+            _touchIndex = Input.touchCount-1;
+            if(Input.GetTouch(_touchIndex).phase == TouchPhase.Began){
+                if(Input.GetTouch(_touchIndex).position.x > Screen.width/2){
+                    _touchPos = Input.GetTouch(_touchIndex).position;
                 }
-            } else {
-                _moveTouch = -1;
+            } else if(Input.GetTouch(_touchIndex).phase == TouchPhase.Ended){
+                _touchIndex = -1;
             }
         }
     }

@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(HealthBase))]
 public class MonsterBase : MonoBehaviour
 {
     public TrashType type = TrashType.ORGANIC;
     public HealthBase health;
     public float timeToDie = 0.3f;
-    public LayerMask trashProjectiles;
+    public string projectileTag = "TrashProjectile";
+
+    void OnValidate()
+    {
+        health = GetComponent<HealthBase>();
+    }
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.layer.Equals(trashProjectiles)){
+        if(collider.gameObject.CompareTag(projectileTag)){
             health.TakeDamage(1);
         }
     }
