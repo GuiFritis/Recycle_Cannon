@@ -17,7 +17,7 @@ public class TrashCan : MonoBehaviour
         trashCount.value -= trashUsage;
     }
 
-    public void CollectTrash(int trashCollected = 1){
+    public void PutTrash(int trashCollected = 1){
         trashCount.value += trashCollected;
     }
 
