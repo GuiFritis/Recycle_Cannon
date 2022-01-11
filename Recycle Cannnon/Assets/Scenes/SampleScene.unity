@@ -1022,6 +1022,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1660275267}
+  - component: {fileID: 1660275268}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -1036,14 +1037,31 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660275266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
   m_LocalPosition: {x: 0, y: 0.56, z: -5.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 124539499}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
+--- !u!114 &1660275268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660275266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9498a2089262cbd4389cd861345023b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trashAmmo: 
+  maxDegrees: 57
+  fireRate: 0.8
+  tapDuration: 0.2
+  rotationSpeedMultiplier: 0.1
 --- !u!1 &1767823738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,6 +1472,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2468901605248781597, guid: eeb5c786edc03cf45a458fc1a9513173, type: 3}
+      propertyPath: cannon
+      value: 
+      objectReference: {fileID: 1660275268}
     - target: {fileID: 2468901605248781599, guid: eeb5c786edc03cf45a458fc1a9513173, type: 3}
       propertyPath: m_Name
       value: PlasticTrash
@@ -1599,6 +1621,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1088092764}
     m_Modifications:
+    - target: {fileID: 6859525805369838101, guid: 90ca992af6269b444ac02ce586a1a6e5, type: 3}
+      propertyPath: cannon
+      value: 
+      objectReference: {fileID: 1660275268}
     - target: {fileID: 6859525805369838102, guid: 90ca992af6269b444ac02ce586a1a6e5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1656,6 +1682,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1088092764}
     m_Modifications:
+    - target: {fileID: 7701287569445996628, guid: 37c17e49e07b3d34b8ff7db5b781a9b2, type: 3}
+      propertyPath: cannon
+      value: 
+      objectReference: {fileID: 1660275268}
     - target: {fileID: 7701287569445996629, guid: 37c17e49e07b3d34b8ff7db5b781a9b2, type: 3}
       propertyPath: m_RootOrder
       value: 2
