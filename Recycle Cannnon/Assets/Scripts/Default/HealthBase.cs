@@ -5,15 +5,21 @@ using UnityEngine;
 public class HealthBase : MonoBehaviour
 {
     
-    public int curHealth;
     public int maxHealth;
+
+    private int _curHealth;
 
     public delegate void DieCallback();
     public event DieCallback OnDie;
 
+    void Awake()
+    {
+        _curHealth = maxHealth;
+    }
+
     public void TakeDamage(int damage = 1){
-        curHealth -= damage;
-        if(curHealth == 0){
+        _curHealth -= damage;
+        if(_curHealth == 0){
             Die();
         }
     }
