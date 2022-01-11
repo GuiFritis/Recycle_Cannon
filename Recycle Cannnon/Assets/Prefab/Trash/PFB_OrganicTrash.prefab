@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8023055833607959805}
   - component: {fileID: 8702320238487815654}
   m_Layer: 0
-  m_Name: OrganicTrash
-  m_TagString: Untagged
+  m_Name: PFB_OrganicTrash
+  m_TagString: Trash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
