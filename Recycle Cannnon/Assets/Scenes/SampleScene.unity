@@ -146,14 +146,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28124946}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1330605806}
-  m_Father: {fileID: 1660275267}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.08715569, y: -0, z: -0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 0.47077867, z: 1.8256423}
+  m_LocalScale: {x: 0.5, y: 0.14557455, z: 0.47664467}
+  m_Children: []
+  m_Father: {fileID: 124539499}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &49061809
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +261,7 @@ GameObject:
   - component: {fileID: 124539502}
   - component: {fileID: 124539501}
   - component: {fileID: 124539500}
+  - component: {fileID: 124539503}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -279,7 +279,8 @@ Transform:
   m_LocalRotation: {x: 0.76604444, y: 0, z: 0, w: 0.64278764}
   m_LocalPosition: {x: 0, y: 1.19, z: -0.14}
   m_LocalScale: {x: 0.8, y: 2.1, z: 0.8}
-  m_Children: []
+  m_Children:
+  - {fileID: 28124947}
   m_Father: {fileID: 1660275267}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 100, y: 0, z: 0}
@@ -346,6 +347,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124539498}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &124539503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124539498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9498a2089262cbd4389cd861345023b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trashAmmo: 
+  PFB_projectiles:
+  - {fileID: 8148861405260871170, guid: d2da85d4718cfee49a8afaac184e24bb, type: 3}
+  - {fileID: 5517392663740122537, guid: 804b4c8c5a1fa7a47bf5334fb78bfdbc, type: 3}
+  - {fileID: 2906386590759776198, guid: 6d54879709809794cb3e67372bd87718, type: 3}
+  maxDegrees: 57
+  fireRate: 0.8
+  tapDuration: 0.2
+  rotationSpeedMultiplier: 0.2
+  instantiateTransform: {fileID: 28124947}
 --- !u!4 &371087965 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6859525805369838102, guid: 90ca992af6269b444ac02ce586a1a6e5, type: 3}
@@ -885,102 +908,6 @@ Transform:
   m_Father: {fileID: 836432155}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1330605805
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1330605806}
-  - component: {fileID: 1330605809}
-  - component: {fileID: 1330605808}
-  - component: {fileID: 1330605807}
-  m_Layer: 0
-  m_Name: PFB_TrashProjectileOrganic
-  m_TagString: TrashProjectile
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1330605806
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330605805}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.92, z: 2.68}
-  m_LocalScale: {x: 0.4, y: 0.3, z: 0.4}
-  m_Children: []
-  m_Father: {fileID: 28124947}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!136 &1330605807
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330605805}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1330605808
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330605805}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: aff715b6ea3221a41a13246d54d8cc12, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1330605809
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330605805}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1439395524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1076,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1660275267}
-  - component: {fileID: 1660275268}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -1169,27 +1095,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 124539499}
-  - {fileID: 28124947}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
---- !u!114 &1660275268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660275266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9498a2089262cbd4389cd861345023b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trashAmmo: 
-  maxDegrees: 57
-  fireRate: 0.8
-  tapDuration: 0.2
-  rotationSpeedMultiplier: 0.2
 --- !u!1 &1767823738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1212,7 @@ GameObject:
   - component: {fileID: 1797122668}
   - component: {fileID: 1797122672}
   - component: {fileID: 1797122671}
+  - component: {fileID: 1797122673}
   m_Layer: 0
   m_Name: PFB_OrganicMonster
   m_TagString: Monster
@@ -1416,6 +1325,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+--- !u!54 &1797122673
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797122666}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!4 &1951667998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2468901605248781596, guid: eeb5c786edc03cf45a458fc1a9513173, type: 3}
@@ -1602,7 +1527,7 @@ PrefabInstance:
     - target: {fileID: 2468901605248781597, guid: eeb5c786edc03cf45a458fc1a9513173, type: 3}
       propertyPath: cannon
       value: 
-      objectReference: {fileID: 1660275268}
+      objectReference: {fileID: 124539503}
     - target: {fileID: 2468901605248781599, guid: eeb5c786edc03cf45a458fc1a9513173, type: 3}
       propertyPath: m_Name
       value: PlasticTrashCan
@@ -1743,7 +1668,7 @@ PrefabInstance:
     - target: {fileID: 6859525805369838101, guid: 90ca992af6269b444ac02ce586a1a6e5, type: 3}
       propertyPath: cannon
       value: 
-      objectReference: {fileID: 1660275268}
+      objectReference: {fileID: 124539503}
     - target: {fileID: 6859525805369838102, guid: 90ca992af6269b444ac02ce586a1a6e5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1804,7 +1729,7 @@ PrefabInstance:
     - target: {fileID: 7701287569445996628, guid: 37c17e49e07b3d34b8ff7db5b781a9b2, type: 3}
       propertyPath: cannon
       value: 
-      objectReference: {fileID: 1660275268}
+      objectReference: {fileID: 124539503}
     - target: {fileID: 7701287569445996629, guid: 37c17e49e07b3d34b8ff7db5b781a9b2, type: 3}
       propertyPath: m_RootOrder
       value: 2

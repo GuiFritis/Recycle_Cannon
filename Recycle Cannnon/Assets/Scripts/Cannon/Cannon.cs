@@ -6,6 +6,7 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     public List<TrashType> trashAmmo;
+    public List<TrashProjectile> PFB_projectiles;
 
     public float maxDegrees = 57f;
 
@@ -13,6 +14,7 @@ public class Cannon : MonoBehaviour
 
     public float tapDuration = 0.2f;
     public float rotationSpeedMultiplier = 0.1f;
+    public Transform instantiateTransform;
 
     private int _touchIndex = -1;
     private float _pos0;
@@ -69,7 +71,7 @@ public class Cannon : MonoBehaviour
         // } 
 
         // DEBUG WITH MOUSE
-        if(Input.GetMouseButtonDown(1) && Input.mousePosition.x > Screen.width/2){
+        if(Input.GetMouseButtonDown(1) && Input.mousePosition.x < Screen.width/2){
             Shoot();
         }
 
@@ -77,7 +79,7 @@ public class Cannon : MonoBehaviour
             touch = true;
         }
         if(Input.GetMouseButton(0) && touch){
-            transform.Rotate(0f, transform.rotation.y + (Input.mousePosition.x - _pos0) * Time.deltaTime * rotationSpeedMultiplier, 0f);
+            transform.Rotate(0f, 0f, transform.rotation.y - (Input.mousePosition.x - _pos0) * Time.deltaTime * rotationSpeedMultiplier);
         }
         if(Input.GetMouseButtonUp(0)){
             touch = false;
@@ -85,6 +87,15 @@ public class Cannon : MonoBehaviour
     }
 
     private void Shoot(){
-        
+        if(trashAmmo.Count > 0){
+            foreach (var projectile in PFB_projectiles)
+            {
+                if(projectile.type == trashAmmo[0]){
+                    trashAmmo.RemoveAt(0);
+                    Instantiate(projectile, instantiateTransform.position, instantiateTransform.rotation);
+                    return;
+                }
+            }
+        }
     }
 }

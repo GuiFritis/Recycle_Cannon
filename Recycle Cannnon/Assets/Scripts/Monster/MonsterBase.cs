@@ -15,13 +15,6 @@ public class MonsterBase : MonoBehaviour
         health = GetComponent<HealthBase>();
     }
 
-    void OnTriggerEnter(Collider collider)
-    {
-        if(collider.gameObject.CompareTag(projectileTag)){
-            health.TakeDamage(1);
-        }
-    }
-
     public void Die(){
         Destroy(this.gameObject, timeToDie);
     }

@@ -6,6 +6,14 @@ public class TrashProjectile : MonoBehaviour
 {
     
     public string monsterTag = "Monster";
+    public float velocity = 5f;
+    public TrashType type = TrashType.ORGANIC;
+    public float timeToDie = 3f;
+
+    void Awake()
+    {
+        Destroy(gameObject, timeToDie);
+    }
 
     void Update()
     {
@@ -13,15 +21,19 @@ public class TrashProjectile : MonoBehaviour
     }
 
     private void MoveForward(){
-
+        transform.Translate(Vector3.up * velocity * Time.deltaTime);
     }
 
     void OnTriggerEnter(Collider collider)
     {
         if(collider.gameObject.CompareTag(monsterTag)){
-            HealthBase monsterHealth = collider.gameObject.GetComponent<HealthBase>();
-            if(monsterHealth != null){
-                monsterHealth.TakeDamage(1);
+            MonsterBase monster = collider.gameObject.GetComponent<MonsterBase>();
+            if(monster != null){
+                if(monster.type == TrashType.ORGANIC && type != TrashType.ORGANIC){
+                    monster.health.TakeDamage(1);
+                } else if(monster.type != TrashType.ORGANIC && type == TrashType.ORGANIC){
+                    monster.health.TakeDamage(1);
+                }
                 Destroy(gameObject);
             }
         }
