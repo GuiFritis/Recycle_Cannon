@@ -11,7 +11,8 @@ public class Trash : MonoBehaviour
 
     void Start()
     {
-        transform.localScale = Vector3.one * 0.1f * trashSize;
+        trashSize = Random.Range(3, 6);
+        transform.localScale = Vector3.one * 0.08f * trashSize;
     }
 
 }

@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -68,11 +69,15 @@ public class Cannon : MonoBehaviour
         // } 
 
         // DEBUG WITH MOUSE
+        if(Input.GetMouseButtonDown(1) && Input.mousePosition.x > Screen.width/2){
+            Shoot();
+        }
+
         if(Input.GetMouseButtonDown(0) && Input.mousePosition.x < Screen.width/2){
             touch = true;
         }
         if(Input.GetMouseButton(0) && touch){
-            transform.Rotate(0f, transform.rotation.y - (Input.mousePosition.x - _pos0) * Time.deltaTime * rotationSpeedMultiplier, 0f);
+            transform.Rotate(0f, transform.rotation.y + (Input.mousePosition.x - _pos0) * Time.deltaTime * rotationSpeedMultiplier, 0f);
         }
         if(Input.GetMouseButtonUp(0)){
             touch = false;

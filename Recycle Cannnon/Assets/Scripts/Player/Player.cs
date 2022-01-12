@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
 
     [Space]
     public float speedMultiplier = 1f;
+    public float repulsionPower = 300f;
+    public float stunDuration = 0.5f;
+    public float recoverDuration = 1.5f;
 
     [Space]
     public HealthBase health;
@@ -30,8 +33,12 @@ public class Player : MonoBehaviour
     private Vector3 _mousePos = Vector2.zero;
 
     private float _touchDuration = 0f;
-    private bool _tapped = false;
     private bool touch = false;
+
+    private GameObject _auxTrash;
+    private GameObject _auxTrashCan;
+    private bool _stuned = false;
+    private bool _tangible = true;
 
     // Update is called once per frame
     void Update()
@@ -41,15 +48,14 @@ public class Player : MonoBehaviour
     }
 
     private void TouchInputControl(){
-        _tapped = false;
-        if(Input.touchCount > 0){
-            verifyTouchPosition();
+        if(Input.touchCount > 0 && !_stuned){
+            VerifyTouchPosition();
             if(_touchIndex >= 0){
                 _touchDuration += Input.GetTouch(_touchIndex).deltaTime;
                 if(_touchDuration > tapDuration){
                     Move();
                 } else if(Input.GetTouch(_touchIndex).phase == TouchPhase.Ended){
-                    _tapped = true;       
+                    Interact();   
                 }
             } else {
                 _touchDuration = 0f;
@@ -64,6 +70,11 @@ public class Player : MonoBehaviour
         //     playerRigidbody.velocity = Vector3.zero;
         // }
         // DEBUG WITH MOUSE
+        if(_stuned){return;}
+        if(Input.GetMouseButtonDown(1) && Input.mousePosition.x > Screen.width/2){
+            Interact();
+        }
+
         if(Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width/2){
             _mousePos = Input.mousePosition;
             touch = true;
@@ -77,7 +88,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void verifyTouchPosition(){
+    private void VerifyTouchPosition(){
         if(_touchIndex < 0){
             _touchIndex = Input.touchCount-1;
             if(Input.GetTouch(_touchIndex).phase == TouchPhase.Began){
@@ -90,29 +101,63 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag(monsterTag)){
-            health.TakeDamage(1);
-            playerRigidbody.AddExplosionForce(3f, collision.transform.position, 3f);
-        }
-    }
-
-    void OnCollisionStay(Collision collision)
-    {
-        if(_tapped){
-            if(collision.gameObject.CompareTag(trashTag) && trash == null){
-                    trash = collision.gameObject.GetComponent<Trash>();
-            } else if(collision.gameObject.CompareTag(trashCanTag) && trash != null){
-                TrashCan trashCan = collision.gameObject.GetComponent<TrashCan>();
-                if(trashCan != null){
-                    if(trashCan.type == trash.type){
-                        trashCan.PutTrash(trash.trashSize);
-                        trash = null;
-                    }
+    private void Interact(){
+        if(trash == null){
+            if(_auxTrash != null){
+                trash = _auxTrash.GetComponent<Trash>();
+            }
+        } else if(_auxTrashCan != null){
+            TrashCan trashCan = _auxTrashCan.GetComponent<TrashCan>();
+            if(trashCan != null){
+                if(trashCan.type == trash.type){
+                    trashCan.PutTrash(trash.trashSize);
+                    trash = null;
                 }
             }
         }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag(monsterTag) && _tangible){
+            _stuned = true;
+            _tangible = false;
+            health.TakeDamage(1);
+            playerRigidbody.AddExplosionForce(repulsionPower, collision.gameObject.transform.position, 10f);
+            Invoke(nameof(UnStun), stunDuration);
+            Invoke(nameof(MakeTangible), recoverDuration);
+        } else if(collision.gameObject.CompareTag(trashCanTag) && trash != null){
+            _auxTrashCan = collision.gameObject;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.CompareTag(trashCanTag)){
+            _auxTrashCan = null;
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if(collider.gameObject.CompareTag(trashTag) && trash == null){
+            _auxTrash = collider.gameObject;
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if(collider.gameObject.CompareTag(trashTag)){
+            _auxTrash = null;
+        }
+    }
+
+    private void UnStun(){
+        _stuned = false;
+    }
+
+    private void MakeTangible(){
+        _tangible = true;
     }
 
 }

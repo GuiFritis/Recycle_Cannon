@@ -7,6 +7,15 @@ public class TrashProjectile : MonoBehaviour
     
     public string monsterTag = "Monster";
 
+    void Update()
+    {
+        MoveForward();
+    }
+
+    private void MoveForward(){
+
+    }
+
     void OnTriggerEnter(Collider collider)
     {
         if(collider.gameObject.CompareTag(monsterTag)){
