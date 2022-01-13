@@ -40,6 +40,11 @@ public class Player : MonoBehaviour
     private bool _stuned = false;
     private bool _tangible = true;
 
+    void Start()
+    {
+        health.OnDie += Die;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -158,6 +163,10 @@ public class Player : MonoBehaviour
 
     private void MakeTangible(){
         _tangible = true;
+    }
+
+    private void Die(){
+        Destroy(gameObject);
     }
 
 }
