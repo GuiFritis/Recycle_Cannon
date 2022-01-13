@@ -110,14 +110,15 @@ public class Player : MonoBehaviour
         if(trash == null){
             if(_auxTrash != null){
                 trash = _auxTrash.GetComponent<Trash>();
-                Destroy(_auxTrash);
-                _auxTrash = null;
+                trash.transform.SetParent(transform);
+                trash.transform.position = transform.position + Vector3.up * 0.5f;
             }
         } else if(_auxTrashCan != null){
             TrashCan trashCan = _auxTrashCan.GetComponent<TrashCan>();
             if(trashCan != null){
                 if(trashCan.type == trash.type){
                     trashCan.PutTrash(trash.trashSize);
+                    Destroy(trash.gameObject);
                     trash = null;
                 }
             }

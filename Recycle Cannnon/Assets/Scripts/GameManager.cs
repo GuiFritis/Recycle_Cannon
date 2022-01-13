@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
             switch (cannon.trashAmmo[0])
             {
                 case TrashType.ORGANIC:
-                    ui_image_ammo_type.color = Color.HSVToRGB(30f, 100f, 59f);
+                    ui_image_ammo_type.color = new Color(0.45f, 0.25f, 0.15f);
                     break;
                 case TrashType.METAL:
                     ui_image_ammo_type.color = Color.yellow;
