@@ -7,19 +7,19 @@ public class HealthBase : MonoBehaviour
     
     public int maxHealth = 3;
 
-    private int _curHealth;
+    public int curHealth {get; private set;}
 
     public delegate void DieCallback();
     public event DieCallback OnDie;
 
     void Awake()
     {
-        _curHealth = maxHealth;
+        curHealth = maxHealth;
     }
 
     public void TakeDamage(int damage = 1){
-        _curHealth -= damage;
-        if(_curHealth == 0){
+        curHealth -= damage;
+        if(curHealth == 0){
             Die();
         }
     }

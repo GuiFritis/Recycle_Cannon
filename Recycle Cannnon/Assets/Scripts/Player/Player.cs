@@ -110,6 +110,8 @@ public class Player : MonoBehaviour
         if(trash == null){
             if(_auxTrash != null){
                 trash = _auxTrash.GetComponent<Trash>();
+                Destroy(_auxTrash);
+                _auxTrash = null;
             }
         } else if(_auxTrashCan != null){
             TrashCan trashCan = _auxTrashCan.GetComponent<TrashCan>();
