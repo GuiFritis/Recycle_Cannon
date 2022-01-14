@@ -10,12 +10,14 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    public TextMeshProUGUI ui_text_life;
-    public Image ui_image_ammo_type;
-    public TextMeshProUGUI ui_text_ammo_ammount;
+    public TextMeshProUGUI uiTextLife;
+    public Image uiImageAmmoType;
+    public TextMeshProUGUI uiTextAmmoAmmount;
+    public TextMeshProUGUI uiPanelWallLife;
 
-    public Player player;
+    public HealthBase playerHealth;
     public Cannon cannon;
+    public HealthBase wallHealth;
 
     void Awake()
     {
@@ -30,10 +32,11 @@ public class GameManager : MonoBehaviour
         UpdateLifeUI();
         UpdateAmmoTypeUI();
         UpdateAmmoAmmountUI();
+        UpdateWallLifeUI();
     }
 
     private void UpdateLifeUI(){
-        ui_text_life.text = "Lifes: "+player.health.curHealth;
+        uiTextLife.text = "Lifes: "+ playerHealth.curHealth;
     }
 
     public void UpdateAmmoTypeUI(){
@@ -41,22 +44,26 @@ public class GameManager : MonoBehaviour
             switch (cannon.trashAmmo[0])
             {
                 case TrashType.ORGANIC:
-                    ui_image_ammo_type.color = new Color(0.45f, 0.25f, 0.15f);
+                    uiImageAmmoType.color = new Color(0.45f, 0.25f, 0.15f);
                     break;
                 case TrashType.METAL:
-                    ui_image_ammo_type.color = Color.yellow;
+                    uiImageAmmoType.color = Color.yellow;
                     break;
                 case TrashType.PLASTIC:
-                    ui_image_ammo_type.color = Color.red;
+                    uiImageAmmoType.color = Color.red;
                     break;
             }
         } else {
-            ui_image_ammo_type.color = Color.white;
+            uiImageAmmoType.color = Color.white;
         }
     }
 
     private void UpdateAmmoAmmountUI(){
-        ui_text_ammo_ammount.text = "Ammo: " + cannon.trashAmmo.Count;
+        uiTextAmmoAmmount.text = "Ammo: " + cannon.trashAmmo.Count;
+    }
+
+    private void UpdateWallLifeUI(){
+        uiPanelWallLife.text = "Wall life: " + wallHealth.curHealth;
     }
 
     public void EndGame(){
