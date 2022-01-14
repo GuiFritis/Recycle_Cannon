@@ -127,14 +127,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag(monsterTag) && _tangible){
-            _stuned = true;
-            _tangible = false;
-            health.TakeDamage(1);
-            playerRigidbody.AddExplosionForce(repulsionPower, collision.gameObject.transform.position, 10f);
-            Invoke(nameof(UnStun), stunDuration);
-            Invoke(nameof(MakeTangible), recoverDuration);
-        } else if(collision.gameObject.CompareTag(trashCanTag) && trash != null){
+        if(collision.gameObject.CompareTag(trashCanTag) && trash != null){
             _auxTrashCan = collision.gameObject;
         }
     }
@@ -148,7 +141,14 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.CompareTag(trashTag) && trash == null){
+        if(collider.CompareTag(monsterTag) && _tangible){
+            _stuned = true;
+            _tangible = false;
+            health.TakeDamage(1);
+            playerRigidbody.AddExplosionForce(repulsionPower, collider.transform.position, 10f);
+            Invoke(nameof(UnStun), stunDuration);
+            Invoke(nameof(MakeTangible), recoverDuration);
+        } else if(collider.gameObject.CompareTag(trashTag) && trash == null){
             _auxTrash = collider.gameObject;
         }
     }
