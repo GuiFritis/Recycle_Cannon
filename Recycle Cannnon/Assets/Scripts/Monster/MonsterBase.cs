@@ -64,17 +64,22 @@ public class MonsterBase : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject == wall.gameObject){
-            _walk = false;
-            InvokeRepeating(nameof(DamageWall), 1f, 1f);
+        if(wall != null){
+            if(collider.gameObject == wall.gameObject){
+                _walk = false;
+                InvokeRepeating(nameof(DamageWall), 1f, 1f);
+            }
         }
     }
 
     private void DamageWall(){
-        wall.TakeDamage(1);
+        if(wall != null){
+            wall.TakeDamage(1);
+        }
     }
 
     public void Die(){
+        GameManager.Instance.MonsterKilled();
         CancelInvoke();
         speed = 0f;
         Destroy(this.gameObject, timeToDie);

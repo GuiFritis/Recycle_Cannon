@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
     public Cannon cannon;
     public HealthBase wallHealth;
 
+    public GameObject gameOverScreen;
+    public GameObject winGameScreen;
+
+    public int monstersCount = 0;
+
     void Awake()
     {
         if(GameManager.Instance == null){
@@ -64,9 +69,19 @@ public class GameManager : MonoBehaviour
 
     private void UpdateWallLifeUI(){
         uiPanelWallLife.text = "Wall life: " + wallHealth.curHealth;
+        if(wallHealth == null || wallHealth.curHealth == 0){
+            gameOverScreen.SetActive(true);
+        }
     }
 
     public void EndGame(){
         Time.fixedDeltaTime = 0;
+    }
+
+    public void MonsterKilled(){
+        monstersCount--;
+        if(monstersCount == 0){
+            winGameScreen.SetActive(true);
+        }
     }
 }

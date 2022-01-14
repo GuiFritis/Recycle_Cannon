@@ -16,6 +16,7 @@ public class WavesManager : MonoBehaviour
     void Awake()
     {
         StartCoroutine(nameof(CallWave));
+        GameManager.Instance.monstersCount = monsters.Count;
     }
 
     private IEnumerator CallWave(){
